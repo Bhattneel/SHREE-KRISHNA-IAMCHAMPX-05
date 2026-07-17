@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree Krishna Iamchampx05 | Elite Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #09090b;
+            --bg-panel: #121214;
+            --bg-hover: #18181b;
+            --border: #27272a;
+            --border-focus: #52525b;
+            --text-main: #fafafa;
+            --text-muted: #a1a1aa;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.15);
+            --green: #22c55e;
+            --green-glow: rgba(34, 197, 94, 0.15);
+            --red: #ef4444;
+            --red-glow: rgba(239, 68, 68, 0.15);
+            --white-glow: rgba(255, 255, 255, 0.1);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased;
+            /* Security: Disable Text Selection & Dragging across the UI */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Allow typing and selection inside Form Inputs only */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        body { background-color: var(--bg-page); color: var(--text-main); min-height: 100vh; padding: 40px 20px; line-height: 1.5; }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        /* Entrance Animation */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Interactive Tap Animation */
+        .btn-primary:active, .select-trigger:active { transform: scale(0.98); }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 25px; margin-bottom: 40px; border-bottom: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo-wrap { display: flex; align-items: center; gap: 16px; }
+        .logo-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: linear-gradient(135deg, #1f1f22, #09090b);
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden;
+        }
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .title-text h1 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.5px; color: #fff; }
+        .title-text p { font-size: 0.8rem; color: var(--gold); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; }
+
+        .btn-primary {
+            width: 100%; background: var(--text-main); color: var(--bg-page);
+            border: none; padding: 14px; border-radius: 10px;
+            margin-top: 10px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+
+        .grid-layout { display: grid; grid-template-columns: 420px 1fr; gap: 40px; align-items: start; animation: fadeIn 0.8s ease-out 0.2s backwards; }
+        @media (max-width: 1024px) { .grid-layout { grid-template-columns: 1fr; } }
+
+        .panel {
+            background: var(--bg-panel); border: 1px solid var(--border);
+            border-radius: 16px; padding: 30px; margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .panel-header { margin-bottom: 24px; font-size: 1.1rem; font-weight: 600; letter-spacing: -0.3px; display: flex; justify-content: space-between; align-items: center;}
+
+        .input-group { margin-bottom: 18px; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        label { display: block; font-size: 0.75rem; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        input {
+            width: 100%; background: var(--bg-page); border: 1px solid var(--border);
+            color: var(--text-main); padding: 12px 16px; border-radius: 8px; font-size: 0.9rem;
+            transition: all 0.2s; outline: none;
+        }
+        input:focus { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-glow); }
+
+        .select-box { position: relative; width: 100%; }
+        .select-trigger {
+            background: var(--bg-page); border: 1px solid var(--border); color: var(--text-main);
+            padding: 12px 16px; border-radius: 8px; font-size: 0.9rem; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;
+        }
+        .select-box.active .select-trigger { border-color: var(--gold); }
+        .select-options {
+            position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+            background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 100;
+            opacity: 0; visibility: hidden; transform: translateY(-5px); transition: all 0.2s;
+        }
+        .select-box.active .select-options { opacity: 1; visibility: visible; transform: translateY(0); }
+        .option-item { padding: 12px 16px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+        .option-item:hover, .option-item.selected { background: var(--bg-hover); color: var(--gold); }
+
+        /* Updated Analytics Grid for 4 Metrics */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        .metric-card {
+            background: var(--bg-page); border: 1px solid var(--border); border-radius: 12px;
+            padding: 16px; display: flex; flex-direction: column; gap: 6px;
+        }
+        .m-title { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 500; }
+        .m-value { font-family: 'JetBrains Mono', monospace; font-size: 1.35rem; font-weight: 600; }
+
+        .feed-container { display: flex; flex-direction: column; gap: 16px; max-height: 70vh; overflow-y: auto; padding-right: 10px; }
+        
+        /* Date Group Accordion Styles */
+        .date-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 4px; }
+        .date-header {
+            background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px;
+            padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; transition: all 0.2s; user-select: none;
+        }
+        .date-header:hover { border-color: var(--gold); background: var(--bg-hover); }
+        .date-title { font-size: 0.95rem; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .date-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: var(--gold-glow); color: var(--gold); padding: 2px 10px; border-radius: 20px; font-weight: 600; }
+        .date-arrow { font-size: 0.8rem; color: var(--text-muted); transition: transform 0.3s ease; }
+        .date-group.active .date-arrow { transform: rotate(180deg); color: var(--gold); }
+        .date-content {
+            display: none; flex-direction: column; gap: 12px;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .date-group.active .date-content { display: flex; }
+
+        .feed-card {
+            background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px;
+            padding: 20px; display: grid; grid-template-columns: 1fr auto; gap: 20px;
+            transition: all 0.2s;
+        }
+        .feed-card:hover { border-color: var(--border-focus); }
+        
+        .c-pair { font-size: 1.1rem; font-weight: 600; color: #fff; }
+        .c-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; background: var(--bg-page); border: 1px solid var(--border); padding: 4px 8px; border-radius: 6px; color: var(--text-muted); }
+        .c-bias { font-size: 0.7rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .bias-buy { background: var(--green-glow); color: var(--green); }
+        .bias-sell { background: var(--red-glow); color: var(--red); }
+        .c-setup { font-size: 0.95rem; color: var(--gold); font-weight: 500; }
+
+        .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+        
+        .status-btn {
+            background: transparent; border: 1px solid var(--border); padding: 6px 14px;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+            display: flex; align-items: center; gap: 6px; pointer-events: none;
+        }
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        
+        .stat-Hit .dot { background: var(--green); }
+        .stat-Hit { color: var(--green); border-color: var(--green-glow); background: var(--green-glow); }
+        .stat-Miss .dot { background: var(--red); }
+        .stat-Miss { color: var(--red); border-color: var(--red-glow); background: var(--red-glow); }
+
+        .c-metrics { display: flex; gap: 15px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); }
+        .link-url { color: var(--text-main); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; font-size: 0.8rem; }
+        .link-url:hover { border-color: var(--text-main); }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+<div class="container">
+    <header>
+        <div class="logo-wrap">
+            <div class="logo-icon">
+                <img src="https://images.unsplash.com/photo-1608976478393-e405a2e55d5b?q=80&w=200&auto=format&fit=crop" class="logo-img" alt="Shree Krishna">
+            </div>
+            <div class="title-text">
+                <h1>Shree Krishna Iamchampx05</h1>
+                <p>Institutional Analytics <span style="font-size:0.6rem; color:var(--green);">● Live Cloud Sync</span></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="grid-layout">
+        <div>
+            <div class="panel">
+                <div class="panel-header">Execute Order</div>
+                <form id="tradeForm">
+                    <div class="row-2">
+                        <div class="input-group">
+                            <label>Asset Pair</label>
+                            <div class="select-box" id="sel-pair">
+                                <div class="select-trigger"><span>XAUUSD</span> ▾</div>
+                                <div class="select-options">
+                                    <div class="option-item selected" data-value="XAUUSD">XAUUSD</div>
+                                    <div class="option-item" data-value="XAGUSD">XAGUSD</div>
+                                    <div class="option-item" data-value="EURUSD">EURUSD</div>
+                                    <div class="option-item" data-value="GBPUSD">GBPUSD</div>
+                                    <div class="option-item" data-value="BTCUSD">BTCUSD</div>
+                                </div>
+                                <input type="hidden" id="pair" value="XAUUSD">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Timeframe</label>
+                            <div class="select-box" id="sel-tf">
+                                <div class="select-trigger"><span>5M</span> ▾</div>
+                                <div class="select-options">
+                                    <div class="option-item" data-value="1M">1M</div>
+                                    <div class="option-item" data-value="3M">3M</div>
+                                    <div class="option-item selected" data-value="5M">5M</div>
+                                    <div class="option-item" data-value="15M">15M</div>
+                                    <div class="option-item" data-value="1H">1H</div>
+                                    <div class="option-item" data-value="4H">4H</div>
+                                    <div class="option-item" data-value="1D">1D</div>
+                                </div>
+                                <input type="hidden" id="timeframe" value="5M">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-2">
+                        <div class="input-group">
+                            <label>Direction</label>
+                            <div class="select-box" id="sel-bias">
+                                <div class="select-trigger"><span>BUY</span> ▾</div>
+                                <div class="select-options">
+                                    <div class="option-item selected" data-value="BUY">BUY</div>
+                                    <div class="option-item" data-value="SELL">SELL</div>
+                                </div>
+                                <input type="hidden" id="bias" value="BUY">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Outcome</label>
+                            <div class="select-box" id="sel-status">
+                                <div class="select-trigger"><span>TP (Hit)</span> ▾</div>
+                                <div class="select-options">
+                                    <div class="option-item selected" data-value="Hit">TP (Hit)</div>
+                                    <div class="option-item" data-value="Miss">SL (Miss)</div>
+                                </div>
+                                <input type="hidden" id="status" value="Hit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Setup Strategy</label>
+                        <input type="text" id="setup" placeholder="e.g. FVG, Breakout" required maxlength="60" autocomplete="off">
+                    </div>
+
+                    <div class="row-2">
+                        <div class="input-group">
+                            <label>Risk:Reward (Plan)</label>
+                            <input type="number" step="any" id="plannedRR" placeholder="2" required min="0.1" max="1000">
+                        </div>
+                        <div class="input-group">
+                            <label>Realized RR</label>
+                            <input type="number" step="any" id="marketMoveRR" placeholder="5" required min="-10" max="1000">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Chart URL</label>
+                        <input type="url" id="chartUrl" placeholder="https://www.tradingview.com/x/..." required autocomplete="off">
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div class="panel" style="padding: 24px;">
+                <div class="panel-header" style="margin-bottom: 16px;">Trade Analytics</div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="m-title">Total</span>
+                        <span class="m-value" id="m-total">0</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-title">Win Rate</span>
+                        <span class="m-value" id="m-winrate" style="color: var(--green);">0%</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-title">Planned RR</span>
+                        <span class="m-value" id="m-rr-plan" style="color: #fff;">+0.0R</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="m-title">Realized RR</span>
+                        <span class="m-value" id="m-rr-real" style="color: var(--gold);">+0.0R</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-header" style="margin: 0 0 15px 5px;">Trade Journal</div>
+            <div class="feed-container" id="feedList">
+                <div style="text-align:center; padding: 40px; color: var(--text-muted);">Connecting to Elite Cloud...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Security: Advanced Anti-Tamper & Shortcut Blocking -->
+<script>
+    (function() {
+        "use strict";
+        // Block F12, Inspect, View Source, Save, Print, and Developer Tools
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P')) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Clear Console periodically to deter inspect attempts
+        setInterval(function() {
+            if (window.console && console.clear) {
+                console.clear();
+            }
+        }, 3000);
+    })();
+</script>
+
+<!-- Firebase Modular SDK directly loaded in Browser -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+    // Your Web App's Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEEK99mVrxqvgrLGUQMoytsEkEjLUxcL0",
+      authDomain: "elite-analytics-journal.firebaseapp.com",
+      databaseURL: "https://elite-analytics-journal-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "elite-analytics-journal",
+      storageBucket: "elite-analytics-journal.firebasestorage.app",
+      messagingSenderId: "721415632972",
+      appId: "1:721415632972:web:2039724aedde4ae4ef1ce9",
+      measurementId: "G-KZ3YCY4F5K"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const tradesRef = ref(db, 'trades');
+
+    let data = [];
+
+    // Security: Input Sanitization against XSS (Script Injection)
+    function sanitizeText(str) {
+        if (!str) return "";
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // Custom Select Dropdown UI logic
+    document.querySelectorAll('.select-box').forEach(box => {
+        const trigger = box.querySelector('.select-trigger');
+        const options = box.querySelectorAll('.option-item');
+        const input = box.querySelector('input');
+        const span = trigger.querySelector('span');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isActive = box.classList.contains('active');
+            document.querySelectorAll('.select-box').forEach(b => b.classList.remove('active'));
+            if (!isActive) box.classList.add('active');
+        });
+
+        options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                options.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+                span.textContent = opt.textContent;
+                input.value = opt.getAttribute('data-value');
+                box.classList.remove('active');
+            });
+        });
+    });
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.select-box').forEach(b => b.classList.remove('active'));
+    });
+
+    // Update Analytics Metrics (Dual RR Tracking: Planned vs Realized)
+    function updateMetrics() {
+        let hit = 0, miss = 0;
+        let rrPlan = 0, rrReal = 0;
+
+        data.forEach(item => {
+            const plannedVal = parseFloat(item.plannedRR || 0);
+            const realVal = parseFloat(item.marketMoveRR || 0);
+
+            if (item.status === 'Hit') { 
+                hit++; 
+                rrPlan += plannedVal;
+                rrReal += realVal;
+            } else { 
+                miss++; 
+                rrPlan -= 1.0;
+                rrReal -= 1.0; 
+            }
+        });
+
+        let total = hit + miss;
+        let winRate = total > 0 ? Math.round((hit / total) * 100) : 0;
+        
+        document.getElementById('m-total').innerText = total;
+        document.getElementById('m-winrate').innerText = winRate + '%';
+        document.getElementById('m-rr-plan').innerText = (rrPlan >= 0 ? '+' : '') + rrPlan.toFixed(1) + 'R';
+        document.getElementById('m-rr-real').innerText = (rrReal >= 0 ? '+' : '') + rrReal.toFixed(1) + 'R';
+    }
+
+    // Helper function to format dates nicely (e.g. 17 Jul 2026, Fri)
+    function formatDateKey(isoString) {
+        if (!isoString) return "Today's Trades";
+        const date = new Date(isoString);
+        if (isNaN(date.getTime())) return "Recorded Trades";
+        return date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', weekday: 'short' });
+    }
+
+    // Render Journal Feed with Date-wise Grouping & Accordion
+    function renderFeed() {
+        const list = document.getElementById('feedList');
+        list.innerHTML = '';
+        updateMetrics();
+
+        if (data.length === 0) {
+            list.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: 12px;">No trades recorded in Cloud yet.</div>`;
+            return;
+        }
+
+        // Group trades by date
+        const groups = [];
+        const groupMap = {};
+        data.forEach(item => {
+            const dateKey = formatDateKey(item.date);
+            if (!groupMap[dateKey]) {
+                groupMap[dateKey] = { dateText: dateKey, trades: [] };
+                groups.push(groupMap[dateKey]);
+            }
+            groupMap[dateKey].trades.push(item);
+        });
+
+        // Render each date group
+        groups.forEach((group, index) => {
+            const dateGroup = document.createElement('div');
+            dateGroup.className = `date-group ${index === 0 ? 'active' : ''}`;
+
+            const dateHeader = document.createElement('div');
+            dateHeader.className = 'date-header';
+            dateHeader.innerHTML = `
+                <div class="date-title">
+                    <span>📅 ${group.dateText}</span>
+                    <span class="date-badge">${group.trades.length} Trade${group.trades.length > 1 ? 's' : ''}</span>
+                </div>
+                <div class="date-arrow">▾</div>
+            `;
+
+            const dateContent = document.createElement('div');
+            dateContent.className = 'date-content';
+
+            group.trades.forEach(item => {
+                let statLabel = item.status === 'Hit' ? 'TP' : 'SL';
+                let resultColor = item.status === 'Hit' ? 'var(--green)' : 'var(--red)';
+                let resultRR = item.status === 'Hit' ? `+${item.marketMoveRR}R` : '-1.0R';
+
+                const card = document.createElement('div');
+                card.className = 'feed-card';
+                card.style.animation = 'fadeIn 0.5s ease-out';
+                card.innerHTML = `
+                    <div class="card-left">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span class="c-pair">${sanitizeText(item.pair)}</span>
+                            <span class="c-tag">${sanitizeText(item.timeframe)}</span>
+                            <span class="c-bias bias-${item.bias.toLowerCase()}">${sanitizeText(item.bias)}</span>
+                        </div>
+                        <div class="c-setup">${sanitizeText(item.setup)}</div>
+                    </div>
+                    <div class="card-right">
+                        <button class="status-btn stat-${item.status}">
+                            <div class="dot"></div> ${statLabel}
+                        </button>
+                        <div class="c-metrics">
+                            <span>1:${item.plannedRR}</span>
+                            <span style="color: ${resultColor}; font-weight:bold;">${resultRR}</span>
+                        </div>
+                        <div class="action-links">
+                            <a href="${encodeURI(item.chartUrl)}" target="_blank" rel="noopener noreferrer" class="link-url">↗ View Chart</a>
+                        </div>
+                    </div>
+                `;
+                dateContent.appendChild(card);
+            });
+
+            dateHeader.addEventListener('click', () => {
+                dateGroup.classList.toggle('active');
+            });
+
+            dateGroup.appendChild(dateHeader);
+            dateGroup.appendChild(dateContent);
+            list.appendChild(dateGroup);
+        });
+    }
+
+    // Listen to Firebase Realtime Database updates
+    onValue(tradesRef, (snapshot) => {
+        const fetchedData = snapshot.val();
+        data = [];
+        if (fetchedData) {
+            Object.keys(fetchedData).forEach(key => {
+                data.push({ id: key, ...fetchedData[key] });
+            });
+            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+        renderFeed();
+    });
+
+    // Save New Trade Directly to Firebase Cloud with Security Checks
+    document.getElementById('tradeForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let rawUrl = document.getElementById('chartUrl').value.trim();
+        // Security check: Only allow strict HTTPS URL protocols
+        if (!rawUrl.startsWith("https://")) {
+            alert("Security Error: Only valid HTTPS chart URLs are permitted.");
+            return;
+        }
+
+        const newLog = {
+            date: new Date().toISOString(),
+            pair: sanitizeText(document.getElementById('pair').value),
+            timeframe: sanitizeText(document.getElementById('timeframe').value),
+            bias: sanitizeText(document.getElementById('bias').value),
+            setup: sanitizeText(document.getElementById('setup').value.trim()),
+            plannedRR: parseFloat(document.getElementById('plannedRR').value),
+            marketMoveRR: parseFloat(document.getElementById('marketMoveRR').value),
+            chartUrl: rawUrl,
+            status: sanitizeText(document.getElementById('status').value)
+        };
+
+        push(tradesRef, newLog);
+        
+        e.target.reset();
+        
+        document.querySelector('#sel-pair span').textContent = 'XAUUSD';
+        document.querySelector('#sel-tf span').textContent = '5M';
+        document.querySelector('#sel-bias span').textContent = 'BUY';
+        document.querySelector('#sel-status span').textContent = 'TP (Hit)';
+    });
+</script>
+</body>
+</html>
