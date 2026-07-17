@@ -65,7 +65,7 @@
 
         .logo-wrap { display: flex; align-items: center; gap: 16px; }
         
-        /* Circle Logo Update */
+        /* Perfect Circle Logo Setup */
         .logo-icon {
             width: 48px; height: 48px; border-radius: 50%;
             background: linear-gradient(135deg, #1f1f22, #09090b);
@@ -73,6 +73,7 @@
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
             position: relative; overflow: hidden;
+            font-size: 1.4rem;
         }
         .logo-img {
             width: 100%;
@@ -197,9 +198,9 @@
 <div class="container">
     <header>
         <div class="logo-wrap">
-            <div class="logo-icon">
-                <!-- Direct Krishna Ji Image Link with Circle Shape -->
-                <img src="https://images.unsplash.com/photo-1608976478393-e405a2e55d5b?q=80&w=200&auto=format&fit=crop" class="logo-img" alt="Shree Krishna">
+            <div class="logo-icon" id="logoBox">
+                <!-- Direct Local Photo Link with Smart Anti-Broken Fallback -->
+                <img src="krishna.jpg" class="logo-img" alt="🦚" onerror="this.style.display='none'; document.getElementById('logoBox').innerHTML='🦚';">
             </div>
             <div class="title-text">
                 <h1>Shree Krishna Iamchampx05</h1>
